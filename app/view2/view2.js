@@ -9,6 +9,14 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', [function() {
-
+.controller('View2Ctrl', ['$scope','$http', function($scope, $http) {
+      $scope.master = {};
+      $scope.overlay = false;
+      $scope.displayRepos = function(search) {
+        $scope.overlay = true;
+        $http.get('https://api.github.com/users/' + $scope.search + '/repos').success(function (data) {
+          $scope.repos = data;
+          $scope.overlay = false;
+        });
+      };
 }]);

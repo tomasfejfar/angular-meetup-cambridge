@@ -1,5 +1,17 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div ng-app="myApp">
+    <p>List of repositories</p>
+
+    <div ng-controller="View2Ctrl">
+        <form ng-submit="displayRepos(search)">
+          Search: <input type="text" ng-model="search"/>
+          <input type="submit" value="Search"></button>
+        </form>
+        <div ng-show="overlay">LOADING...</div>
+        <div ng-hide="repos">No repos</div>
+        <ul ng-show="repos">
+            <li ng-repeat="repo in repos">
+                <a href="#/repos/{{ repo.owner.login }}/{{ repo.name }}">{{ repo.name }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
