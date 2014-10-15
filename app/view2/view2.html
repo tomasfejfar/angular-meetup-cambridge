@@ -3,15 +3,24 @@
 
     <div ng-controller="View2Ctrl">
         <form ng-submit="displayRepos(search)">
-          Search: <input type="text" ng-model="search"/>
-          <input type="submit" value="Search"></button>
+            Search: <input type="text" ng-model="search"/>
+            <input type="submit" value="Search"></button>
         </form>
         <div ng-show="overlay">LOADING...</div>
         <div ng-hide="repos">No repos</div>
-        <ul ng-show="repos">
-            <li ng-repeat="repo in repos">
-                <a href="#/repos/{{ repo.owner.login }}/{{ repo.name }}">{{ repo.name }}</a>
-            </li>
-        </ul>
+        <div ng-show="repos">
+            <ul>
+                <li><a ng-click="order('-stargazers_count', false)">Most popular</a></li>
+                <li><a ng-click="order('-watchers_count', false)">Most active</a></li>
+            </ul>
+            <ul>
+                <li ng-repeat="repo in repos">
+                    <pre>{{repo}}</pre>
+                    <a href="#/repos/{{ repo.owner.login }}/{{ repo.name }}">{{ repo.name }}</a><br>
+                    Starred: {{ repo.stargazers_count }}<br>
+                    Watchers: {{repo.watchers_count }}
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
